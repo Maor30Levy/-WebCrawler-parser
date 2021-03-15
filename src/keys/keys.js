@@ -1,14 +1,16 @@
-const {getSecret} = require('../aws/ssm');
+const { getSecret } = require('../aws/ssm');
+const keys = {};
+const getKeys = async () => {
+    try {
 
-const getKeys = async ()=>{
-    try{
-        const keys = {
-            port: await getSecret('parserPort')
-        };
+        keys.port = await getSecret('parserPort');
+
         return keys
-    }catch(err){
+    } catch (err) {
         console.log(err)
     }
 };
 
-module.exports = {getKeys};
+getKeys();
+
+module.exports = keys;

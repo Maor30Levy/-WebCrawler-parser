@@ -1,16 +1,15 @@
 const express = require('express');
 const cors = require('cors');
-const { getKeys } = require('./keys/keys');
 let keys;
 const initServer = async () => {
     try {
         if (process.env.PORT) {
             await require('./keys/setKeys').setKeys();
         }
-        keys = await getKeys();
+        keys = require('./keys/keys');
         const app = express();
         const messageRouter = require('./routers/messageRouter');
-        const port = process.env.PORT;
+        const port = keys.port;
         app.use(express.json());
         app.use(cors());
         app.use(messageRouter);
