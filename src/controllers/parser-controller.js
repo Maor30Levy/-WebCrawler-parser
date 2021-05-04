@@ -3,9 +3,9 @@ const parseURL = require('../utils/parse');
 const parser = async (req, res) => {
     try {
         const result = await parseURL(req.body.url);
-        res.send(result);
+        return res.send(result);
     } catch (err) {
-        res.status(404).send(err.message);
+        return res.status(404).send(err.message);
     }
 };
 
